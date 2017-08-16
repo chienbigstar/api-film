@@ -1,2 +1,14 @@
-<h1>Hello#index</h1>
-<p>Find me in app/views/hello/index.html.erb</p>
+<div class="container">
+  <header class="jumbotron my-4 text-center">
+    <h1 class="display-3">API LVC</h1>
+    <p class="lead">FILM AND SEO</p>
+    <div class='col-md-4 col-md-offset-4' style="border: 1px solid gray; padding: 20px; margin-top: 20px">
+      <%= form_tag login_create_path, remote: true do %>
+        <%= text_field_tag :username, '', class: 'form-control', placeholder: 'User Name' %><br>
+        <%= password_field_tag :password, '', class: 'form-control', placeholder: 'Pass Work' %><br>
+        <%= submit_tag :Login, class: 'form-control btn btn-success' %>
+      <% end %>
+    </div>
+  </header>
+
+</div>
