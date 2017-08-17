@@ -1,0 +1,28 @@
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <table class="table">
+      <thead>
+      <th>Email</th>
+      <th>username</th>
+      <th>password</th>
+      <th>apikey</th>
+      <th>bitcoin</th>
+      <th>dogecoin</th>
+      <th>list</th>
+      </thead>
+      <tbody>
+      <% @pages.each do |p| %>
+          <tr>
+            <td><%= p.email %></td>
+            <td><%= p.username %></td>
+            <td><%= p.api_key %></td>
+            <td><%= p.password %></td>
+            <td><%= p.bitcoin %></td>
+            <td><%= p.dogecoin %></td>
+            <td><%= p.list %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

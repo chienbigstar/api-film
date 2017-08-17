@@ -1,0 +1,30 @@
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div>
+      <a class="btn btn-primary" href="<%= new_page_path %>">New Page</a>
+      <form method="get" action="<%= pages_path %>">
+        <input name="search" value="1" hidden><br>
+        <input name="value" value="<%= @value %>"><br>
+        <button>Ok</button>
+      </form>
+    </div>
+    <table class="table">
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Coin</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        <% @pages.each do |p| %>
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.name %></td>
+            <td><%= p.coin %></td>
+            <td><%= p.description %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

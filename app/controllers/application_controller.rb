@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  private
   def login?
+    true
     session[:timeout] ||= 0
     session[:username] && Time.now < session[:timeout]
   end

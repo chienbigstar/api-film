@@ -9,6 +9,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="wrapper" class="toggled">
+      <%= render 'layouts/sidebar' if login? %>
+      <%= yield %>
+    </div>
   </body>
 </html>
