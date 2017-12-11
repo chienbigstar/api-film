@@ -1,7 +1,11 @@
 <div id="page-content-wrapper">
   <div class="container-fluid">
+  <div>
+    <a class="btn btn-primary" href="<%= new_account_path %>" >Add new</a>
+  </div>
     <table class="table">
       <thead>
+      <th>Ip</th>
       <th>Email</th>
       <th>username</th>
       <th>password</th>
@@ -9,17 +13,24 @@
       <th>bitcoin</th>
       <th>dogecoin</th>
       <th>list</th>
+      <th>action</th>
       </thead>
       <tbody>
-      <% @pages.each do |p| %>
+      <% @accounts.each do |a| %>
           <tr>
-            <td><%= p.email %></td>
-            <td><%= p.username %></td>
-            <td><%= p.api_key %></td>
-            <td><%= p.password %></td>
-            <td><%= p.bitcoin %></td>
-            <td><%= p.dogecoin %></td>
-            <td><%= p.list %></td>
+            <td><%= a.ip %></td>
+            <td><%= a.email %></td>
+            <td><%= a.username %></td>
+            <td><%= a.api_key %></td>
+            <td><%= a.password %></td>
+            <td><%= a.bitcoin %></td>
+            <td><%= a.dogecoin %></td>
+            <td><%= a.list %></td>
+            <td>
+              <a href="<%= edit_account_path(a) %>">Edit</a>
+              <%= link_to 'Destroy', account_path(a),
+                          data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+            </td>
           </tr>
       <% end %>
       </tbody>

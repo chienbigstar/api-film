@@ -1,0 +1,23 @@
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <%= form_for @account, class: 'form-group' do |f| %>
+        <label>ip</label>
+        <%= f.text_field :ip %><br>
+        <label>email</label>
+        <%= f.text_field :email %><br>
+        <label>username</label>
+        <%= f.text_field :username %><br>
+        <label>password</label>
+        <%= f.text_field :password %><br>
+        <label>api_key</label>
+        <%= f.text_field :api_key %><br>
+        <label>bitcoin</label>
+        <%= f.text_field :bitcoin %><br>
+        <label>dogecoin</label>
+        <%= f.text_field :dogecoin %><br>
+        <label>list</label>
+        <%= f.text_field :list %><br>
+        <%= f.submit :OK %>
+    <% end %>
+  </div>
+</div>

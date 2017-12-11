@@ -1,0 +1,24 @@
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <a class="btn btn-primary" href="<%= new_config_path %>">New config</a>
+  </div>
+    <table class="table">
+      <thead>
+      <th>key</th>
+      <th>value</th>
+      <th>action</th>
+      </thead>
+      <tbody>
+      <% @configs.each do |p| %>
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.value %></td>
+            <td><a href="<%= edit_config_path(p) %>">Edit</a>
+                <%= link_to 'Destroy', config_path(p),
+                    data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+            </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

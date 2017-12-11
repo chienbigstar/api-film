@@ -13,7 +13,9 @@
         <th>Id</th>
         <th>Name</th>
         <th>Coin</th>
+        <th>Time</th>
         <th>Description</th>
+        <th>Action</th>
       </thead>
       <tbody>
         <% @pages.each do |p| %>
@@ -21,7 +23,12 @@
             <td><%= p.id %></td>
             <td><%= p.name %></td>
             <td><%= p.coin %></td>
+            <td><%= p.time %></td>
             <td><%= p.description %></td>
+            <td><a href="<%= edit_page_path(p) %>">Edit</a>
+              <%= link_to 'Destroy', page_path(p),
+                          data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+            </td>
           </tr>
       <% end %>
       </tbody>

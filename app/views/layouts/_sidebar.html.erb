@@ -14,6 +14,12 @@
         <li>
           <a class="link-menu" href="<%= accounts_path %>">Account</a>
         </li>
+        <li>
+          <a class="link-menu" href="<%= configs_path %>">Config</a>
+        </li>
+        <li>
+          <%= link_to 'Logout', login_destroy_path, :method => :delete, class: 'link-menu' %>
+        </li>
       </ul>
     </li>
   </ul>
