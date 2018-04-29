@@ -1,0 +1,46 @@
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">
+      <a href="#">
+        API LVC
+      </a>
+    </li>
+    <li>
+      <a href="#">Tool</a>
+      <ul>
+        <li>
+          <a class="link-menu" href="<%= pages_path %>">Trade</a>
+        </li>
+        <% if is_admin?  %>
+          <li>
+            <a class="link-menu" href="<%= groups_path %>">Group</a>
+          </li>
+          <li>
+            <a class="link-menu" href="<%= accounts_path %>">Account</a>
+          </li>
+          <li>
+            <a class="link-menu" href="<%= standards_path %>">Standard</a>
+          </li>
+          <li>
+            <a class="link-menu" href="<%= slots_path %>">Slot</a>
+          </li>
+          <li>
+            <a class="link-menu" href="<%= users_path %>">User</a>
+          </li>
+          <li>
+            <a class="link-menu" href="<%= backups_path %>">Backup trang</a>
+          </li>
+          <li>
+            <a class="link-menu" href="/info/login_facebook">Login facebook</a>
+          </li>
+        <% end %>
+        <li>
+          <a class="link-menu" href="<%= info_index_path %>">Code file run.js</a>
+        </li>
+        <li>
+          <%= link_to 'Logout', login_destroy_path, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'link-menu' %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
