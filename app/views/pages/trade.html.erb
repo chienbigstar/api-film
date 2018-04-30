@@ -1,12 +1,12 @@
 <div id="page-content-wrapper">
   <div class="container-fluid">
     <div class="container">
-      <%= form_tag do_trade_pages_path(id: @page.id) do %>
+      <%= form_tag do_trade_pages_path(id: @page.id), remote: true do %>
           <label>Tên phương pháp</label>
           <li class="list-group-item"><b><%= @page.name %></b></li>
           <br>
           <label>Mô tả</label>
-          <li class="list-group-item"><textarea class="form-control" cols="100" rows="10"><%= @page.description %></textarea></li>
+          <li class="list-group-item"><textarea class="form-control" cols="100" rows="2"><%= @page.description %></textarea></li>
           <br>
           <label>Số tiền chuỗi</label>
           <li class="list-group-item">
@@ -25,14 +25,13 @@
           <label>Dừng khi bị lỗ($)</label>
           <li class="list-group-item">
           <input name="lose" class="form-control" type="number" required>
-           <span style="color:red">
+           <span style="color:red">Chỗ này điền số dương nhá(không thêm dấu "-" đằng trước đâu).
              Điền số tiền bị lỗ đủ để chạy hết chuỗi theo ý bạn nhé. Điền ít quá là ko đủ chuỗi đâu
             </span>
           </li>
           <br>
           <input type="submit" value="OK" class="btn btn-primary">
-      <% end %>
+    <% end %>
     </div>
   </div>
 </div>
-

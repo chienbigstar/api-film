@@ -1,8 +1,8 @@
 class GroupsController < ApplicationController
-  
+  before_action :already_login?
 
   def index
-    @groups = Group.where(user_id: session['user_id']).order(:id).page(params[:page])
+    @groups = Group.order(:id).page(params[:page])
   end
 
  def new
@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    Group.create group_params.merge({user_id: session['user_id']})
+    Group.create group_params
     redirect_to groups_path
   end
 
@@ -32,6 +32,6 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit :id, :name, :description
+    params.require(:group).permit :name, :description
   end
 end

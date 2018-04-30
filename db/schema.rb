@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427234615) do
+ActiveRecord::Schema.define(version: 20180502024825) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180427234615) do
     t.string "potcoin"
     t.string "kb3coin"
     t.string "info"
-    t.integer "status", default: 0
+    t.integer "status"
   end
 
   create_table "attributes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20180427234615) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.integer "group_id"
+    t.integer "chuoi"
+  end
+
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "slots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -103,6 +110,19 @@ ActiveRecord::Schema.define(version: 20180427234615) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "student_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "username"
     t.string "password"
@@ -112,6 +132,7 @@ ActiveRecord::Schema.define(version: 20180427234615) do
     t.string "ip"
     t.string "info"
     t.date "expired"
+    t.text "token"
   end
 
   create_table "values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

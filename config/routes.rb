@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   resources :groups
 
+  get 'trade/aibroker'
+  get 'trade/ustrade'
+  get 'trade/weltrade'
+
   get 'tools/index'
   get 'tools/page_factory'
 

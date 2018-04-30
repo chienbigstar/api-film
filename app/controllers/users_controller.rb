@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
   def index
     if is_admin?
-      @users = User.all
+      @users = User.all.order(:id)
     elsif is_editor?
-      @users = User.where.not(role: :admin)
+      @users = User.where.not(role: :admin).order(:id)
     else
       redirect_to root_path
     end
@@ -38,8 +38,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    p = params.require(:user).permit :id, :username, :password, :role if is_admin?
-    p = params.require(:user).permit :id, :username, :password if is_editor?
+    p = params.require(:user).permit :id, :username, :password, :role, :info, :expired if is_admin?
+    p = params.require(:user).permit :id, :username, :password, :info, :expired if is_editor?
     p
   end
 

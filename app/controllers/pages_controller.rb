@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     if params[:search]
       @value = params[:value]
-      @pages = Page.where("name like '%#{params[:value]}%'").order(:group_id).page(params[:page])
+      @pages = Page.includes(:group).where("name like '%#{params[:value]}%'").order(:group_id).page(params[:page])
     elsif params[:update_all]
       redirect_to(pages_path) and return unless params[:ids]
       params[:ids].each do |i|
@@ -62,42 +62,46 @@ class PagesController < ApplicationController
   end
 
   def do_trade
-    # id = params[:id]
-    # lvc_list = params[:list]
-    # lvc_profit = params[:profit]
-    # lvc_lose = params[:lose]
+    id = params[:id]
+    lvc_list = params[:list]
+    lvc_profit = params[:profit]
+    lvc_lose = params[:lose]
 
-    # result = ''
-    # result += Slot.find_by(key: :variables).value
-    # result += 'delete $pages;'
-    # result += 'delete $this;'
+    result = ''
+    result += Slot.find_by(key: :variables).value
+    result += 'delete $pages;'
+    result += 'delete $this;'
 
-    # result += '$pages={};'
-    # pages = Page.where(id: id)
-    # pages.each do |p|
-    #   content = p.content
-    #   content = content.gsub('@lvc_list', lvc_list)
-    #   content = content.gsub('@lvc_profit', lvc_profit)
-    #   content = content.gsub('@lvc_lose', lvc_lose)
-    #   result += "$pages['#{p.name}']={code: #{content}, time: #{p.time}, id: #{p.id}};"
-    # end
+    result += '$pages={};'
+    pages = Page.where(id: id)
+    pages.each do |p|
+      content = p.content
+      default_function_variables = Slot.where(key: :default_function_variables).first.value
+      content = content.gsub('@default_function_variables', default_function_variables)
+      auto_change_graph = p.yes? ? 'true' : 'false'
+      content = content.gsub('@auto_change_graph', auto_change_graph)
+      content = content.gsub('@namePP', p.name)
+      content = content.gsub('@lvc_list', lvc_list)
+      content = content.gsub('@lvc_profit', lvc_profit)
+      content = content.gsub('@lvc_lose', lvc_lose)
+      result += "$pages['#{p.name}']={code: #{content}, time: #{p.time}, id: #{p.id}};"
+    end
 
-    # result += '$this={};'
-    # Standard.all.each do |c|
-    #   result += "$this['#{c.key}']= #{c.value};"
-    # end
-    # result += Slot.find_by(key: :run_loop).value
-    # @result = result
-    render :do_trade, layout: false
+    result += '$this={};'
+    Standard.all.each do |c|
+      result += "$this['#{c.key}']= #{c.value};"
+    end
+    result += Slot.find_by(key: :run_loop).value
+    @result = {data: result}
   end
 
 
   private
   def page_params
     p = if is_admin?
-      params.require(:page).permit :id, :name, :description, :coin, :content, :time, :status, :group_id
+      params.require(:page).permit :id, :name, :description, :coin, :content, :time, :status, :group_id, :chuoi
     else
-      params.require(:page).permit :id, :name, :description, :coin, :time, :content
+      params.require(:page).permit :id, :name, :description, :coin, :time, :content, :chuoi
     end
     p[:status] = :not_code unless p[:status]
     p

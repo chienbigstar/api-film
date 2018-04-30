@@ -4,18 +4,16 @@ class LoginController < ApplicationController
   def create
     user = User.find_by login_params
     if user
-      user.update ip: request.remote_ip
-      session['username'] = user.username
-      session['user_id'] = user.id
-      session['timeout'] = Time.now + 15.minutes
-      cookies[:user_id] = user.id
+      session[:current_user] = user
+      cookies[:token] = user.token
       cookies[:ip] = request.remote_ip
+      user.update ip: request.remote_ip
       redirect_to pages_path
     end
   end
 
   def destroy
-    session['username'] = nil
+    session.delete(:current_user)
     redirect_to root_path
   end
 

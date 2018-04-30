@@ -44,6 +44,7 @@
         <th>Name</th>
         <th>Website</th>
         <th>Theo Chuỗi</th>
+        <th>Chuyển cặp tiền</th>
         <th>Action</th>
       </thead>
       <tbody>
@@ -59,6 +60,10 @@
                color = p.on? ? 'label label-warning' : 'label label-info'
             %>
             <td><label class="<%= color %>"><%= p.on? ? 'Yes' : 'No' %></label></td>
+            <%
+              color = p.yes? ? 'label label-warning' : 'label label-info'
+            %>
+            <td><label class="<%= color %>"><%= p.yes? ? 'Yes' : 'No' %></label></td>
             <td>
               <% if is_admin? %>
                 <a class="label label-primary" href="<%= edit_page_path(p) %>">Edit</a>

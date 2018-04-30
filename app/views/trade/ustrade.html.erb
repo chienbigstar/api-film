@@ -9,15 +9,11 @@
   </head>
 
   <body oncontextmenu="return false;">
-    <%= render 'layouts/header' %>
-    <div class="container-fluid">
       <div class="row">
-        <%= render 'layouts/sidebar' %>
-        <div class="col-sm-10">
-          <%= yield %>
+        <div class="col-md-9">
+          <iframe style="width:100%;min-height:600px" src="https://order.ustrade.global"></iframe>
         </div>
+        <div class="col-md-3" id="info" style="padding:0">Loading...</div>
       </div>
-    </div>
-    <%= render 'layouts/footer' %>
   </body>
 </html>

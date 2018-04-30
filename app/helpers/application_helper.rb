@@ -1,11 +1,11 @@
 module ApplicationHelper
-  def login?
+    def login?
     return true if @current_user
-    username = session[:username]
-    return false unless username
-    @current_user = User.where(username: username).first
+    current_user = session[:current_user]
+    return false unless current_user
+    @current_user = User.find_by_id current_user['id']
     unless @current_user
-      session.delete(:username)
+      session.delete(:current_user)
       return false
     end
     true
@@ -16,8 +16,7 @@ module ApplicationHelper
     if @current_user
       user = @current_user
     else
-      username = session[:username];
-      user = User.where(username: username).first
+      user = User.find_by_id session[:current_user]['id']
     end
     @is_admin = user.admin?
     @is_admin
@@ -28,8 +27,7 @@ module ApplicationHelper
     if @current_user
       user = @current_user
     else
-      username = session[:username];
-      user = User.where(username: username).first
+      user = User.find_by_id session[:current_user]['id']
     end
     @is_editor = user.editor?
     @is_editor

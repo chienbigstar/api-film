@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body oncontextmenu="return false;">
     <div class="container">
       <header class="my-4 text-center" style="margin-top:100px">
         <h1 class="display-3">VNstar</h1>
@@ -20,8 +20,17 @@
             <%= submit_tag :Login, class: 'form-control btn btn-success' %>
           <% end %>
         </div>
+        <br>
+        <div style="color:red">
+          Khi bạn đăng nhập sang máy khác thì tất cả các máy đã đăng nhập trước đó đều bị đăng xuất ra.
+        </div>
       </header>
     </div>
+    <script type="text/javascript">
+      <% if @stopped %>
+          window.alert('có một người khác đã đăng nhập vào tài khoản của bạn.');
+      <% end %>
+    </script>
   </body>
 </html>
 

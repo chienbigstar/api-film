@@ -11,33 +11,3 @@
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
-
-if (getCookie("user_id")) {
-  App.messages = App.cable.subscriptions.create('RoomChannel', {
-    received: function(data) {
-      $.ajax({
-        url: '/login/destroy',
-        type: 'DELETE',
-        success: function(result) {
-          window.location.href = '/';
-          window.alert('có một người khác đã đăng nhập vào tài khoản của bạn.');
-        },
-        error: function() {
-          window.location.href = '/';
-        }
-      });
-    },
-    disconnected: function() {
-     
-    },
-    speak: function() {
-      this.perform('speak', {});
-    }
-  });
-}
-
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
